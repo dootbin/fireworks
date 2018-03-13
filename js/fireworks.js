@@ -161,6 +161,24 @@ Firework.prototype.update = function(index) {
   var velocityX = Math.cos(this.angle) * this.speed, 
       velocityY = Math.sin(this.angle) * this.speed;
 
+  // How far will the firework have traveled with the above velocities applied
+  this.distanceTraveled = calculateDistance(this.startX, this.startY, this.x + velocityX, this.y + this.velocityY);
+
+  // If the distance traveled, including velocities, is greater than the intial distance to target,
+  // then the target has been reached. (we are there!)
+
+  if (this.distanceTraveled >= this.distanceToTarget) {
+
+    console.log("Arrived");
+
+  } else {
+    //Not there yet... 
+
+    this.x += velocityX;
+    this.y = velocityY;
+
+  }
+  
 };
 
 
