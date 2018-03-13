@@ -143,6 +143,24 @@ Firework.prototype.update = function(index) {
 
   this.coordinates.pop();
 
+  //Now, add the point the firework is now at the beginning of our cordinates array property (insert)
+
+  this.coordinates.unshift([this.x, this.y]);
+
+  // Make the target circle pulsate by adjusting its radius
+
+  if (this.targetRadius < 8 ) {
+    this.targetRadius += .3;
+  } else {
+    this.targetRadius = 1;
+  }
+
+  this.speed *= this.acceleration;
+
+  //Calculate the current velocities based on angle and speed
+  var velocityX = Math.cos(this.angle) * this.speed, 
+      velocityY = Math.sin(this.angle) * this.speed;
+
 };
 
 
