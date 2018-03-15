@@ -426,9 +426,47 @@ function heartBeat() {
         timerTick++;
     }
     
+
+    if (limiterTick >= limiterTotal) {
+        
+      if (mouseDown) {  // mouse is not pressed down
+          
+          // Launch a firework particle from bottom-middle
+          // of the screen (ground), then set a random
+          // target point (coordinates).  Note: target y-position
+          // should always be in top half of screen - safety first!
+          fireworks.push(new Firework(canvasWidth/2, canvasHeight, mouseXPosition, mouseYPosition));
+          
+          limiterTick = 0;
+          
+      }
+      
+  } else {
+      limiterTick++;
+  }
+
 }
 
+canvas.addEventListener('mousemove', function(e) {
 
+  mouseXPosition = e.pageX - canvas.offsetLeft;
+  mouseYPosition = e.pageY - canvas.offsetTop;
+
+});
+
+canvas.addEventListener('mousedown', function(e) {
+
+  e.preventDefault();
+  mouseDown = true;
+
+});
+
+canvas.addEventListener('mouseup', function(e) {
+
+  e.preventDefault();
+  mouseDown = false;
+
+});
 
 // Get our heartBeat started - jump around!
 window.onload = heartBeat;
